@@ -1,0 +1,45 @@
+{
+ "skin_id": "proc_0014",
+ "model": "classic",
+ "pose": "tpose",
+ "projection": "orthographic",
+ "scale_px_per_texel": 8,
+ "background_rgb": [
+  190,
+  190,
+  190
+ ],
+ "panels": {
+  "front": [
+   0,
+   24,
+   288,
+   304
+  ],
+  "back": [
+   288,
+   24,
+   288,
+   304
+  ],
+  "left": [
+   576,
+   24,
+   288,
+   304
+  ],
+  "right": [
+   864,
+   24,
+   288,
+   304
+  ],
+  "texture": [
+   1168,
+   48,
+   256,
+   256
+  ]
+ },
+ "skin_sha256": "8b156b87abc337c8dd784a2df3d39b2f6c330585b315147bebda83c308bd7418"
+}

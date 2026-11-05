@@ -1,0 +1,35 @@
+name: self-tests
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  cpu:
+    # No GPU and no Minecraft: the whole white-box pipeline runs on synthetic episodes (mineengine.cap_synth writes captures in the
+    # real output format). The rendered self-test needs a block registry built from your own client jar
+    # (python scripts/setup_assets.py), so CI skips it; the capture tests that encode video need ffmpeg + ffprobe and skip
+    # themselves when those are missing.
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: gradle/actions/wrapper-validation@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install mineengine (CPU torch)
+        run: |
+          python -m pip install --upgrade pip
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install -e .
+      - name: mineengine self-tests (synthetic episodes)
+        run: bash tests/run_cpu_selftests.sh
+      - name: capture post-processing tests
+        working-directory: capture
+        run: python -m unittest discover -s postprocess/tests

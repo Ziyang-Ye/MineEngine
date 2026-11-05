@@ -1,0 +1,11 @@
+# Modified in this repository (November 2026): enabled set to false and serverUuid removed, so no usage statistics are sent.
+# Written by the bStats library (MIT, Copyright (c) 2021 Bastian Oppermann; licence text in LICENSES/MIT-bStats.txt at the
+# repository root).
+
+# bStats collects some data for plugin authors like how many servers are using their plugins.
+# To honor their work, you should not disable it.
+# This has nearly no effect on the server performance!
+# Check out https://bStats.org/ to learn more :)
+
+enabled: false
+logFailedRequests: false

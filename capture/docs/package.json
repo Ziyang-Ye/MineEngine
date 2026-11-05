@@ -1,0 +1,16 @@
+{
+  "name": "docs",
+  "version": "1.0.0",
+  "description": "This folder builds a static documentation website.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "private": true,
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "jsdoc": "^4.0.5"
+  }
+}

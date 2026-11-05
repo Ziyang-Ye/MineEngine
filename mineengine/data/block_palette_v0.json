@@ -1,0 +1,130 @@
+{
+ "note": "Block palette v0 of the white-box renderer (the 12 ids of mc.py). Blocks outside the table fold into the nearest material class (cap_palette.to_v0); extended ids may add colours, never a player colour (magenta (255, 0, 255), pure yellow (255, 230, 0)).",
+ "blocks": [
+  {
+   "id": 0,
+   "name": "air",
+   "rgb": [
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "id": 1,
+   "name": "grass_block",
+   "rgb": [
+    106,
+    170,
+    64
+   ]
+  },
+  {
+   "id": 2,
+   "name": "stone",
+   "rgb": [
+    125,
+    125,
+    125
+   ]
+  },
+  {
+   "id": 3,
+   "name": "dirt",
+   "rgb": [
+    134,
+    96,
+    67
+   ]
+  },
+  {
+   "id": 4,
+   "name": "bedrock",
+   "rgb": [
+    60,
+    60,
+    60
+   ]
+  },
+  {
+   "id": 5,
+   "name": "oak_planks",
+   "rgb": [
+    162,
+    130,
+    78
+   ]
+  },
+  {
+   "id": 6,
+   "name": "cobblestone",
+   "rgb": [
+    110,
+    110,
+    110
+   ]
+  },
+  {
+   "id": 7,
+   "name": "glass",
+   "rgb": [
+    190,
+    220,
+    230
+   ]
+  },
+  {
+   "id": 8,
+   "name": "oak_log",
+   "rgb": [
+    102,
+    81,
+    50
+   ]
+  },
+  {
+   "id": 9,
+   "name": "tnt",
+   "rgb": [
+    200,
+    50,
+    40
+   ]
+  },
+  {
+   "id": 10,
+   "name": "red_wool",
+   "rgb": [
+    180,
+    40,
+    40
+   ]
+  },
+  {
+   "id": 11,
+   "name": "blue_wool",
+   "rgb": [
+    50,
+    70,
+    180
+   ]
+  }
+ ],
+ "player_colors": {
+  "team0": [
+   255,
+   0,
+   255
+  ],
+  "team1": [
+   255,
+   230,
+   0
+  ]
+ },
+ "sky_rgb": [
+  150,
+  190,
+  235
+ ]
+}

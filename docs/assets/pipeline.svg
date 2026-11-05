@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="330" viewBox="0 0 980 330" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif">
+  <rect width="980" height="330" rx="14" fill="#ffffff"/>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5b6472"/>
+    </marker>
+  </defs>
+  <!-- capture -->
+  <text x="30" y="38" font-size="15" font-weight="700" fill="#1f2328">1 · capture</text>
+  <rect x="22" y="52" width="250" height="250" rx="12" fill="#eef6ee" stroke="#5dbb63" stroke-width="1.5"/>
+  <g font-size="13" fill="#1f2328">
+    <rect x="38" y="70" width="218" height="52" rx="8" fill="#fff" stroke="#b9dcbc"/>
+    <text x="50" y="92" font-weight="600">Paper server</text>
+    <text x="50" y="110" fill="#57606a">MirrorBot plugin: world-state log</text>
+    <rect x="38" y="134" width="218" height="52" rx="8" fill="#fff" stroke="#b9dcbc"/>
+    <text x="50" y="156" font-weight="600">2 Mineflayer bots</text>
+    <text x="50" y="174" fill="#57606a">45+ episode types, 45 biomes</text>
+    <rect x="38" y="198" width="218" height="88" rx="8" fill="#fff" stroke="#b9dcbc"/>
+    <text x="50" y="220" font-weight="600">2 camera clients</text>
+    <text x="50" y="238" fill="#57606a">capture mod: frames + the pose</text>
+    <text x="50" y="254" fill="#57606a">and FOV each frame was</text>
+    <text x="50" y="270" fill="#57606a">rendered with (pose link)</text>
+  </g>
+  <line x1="276" y1="177" x2="318" y2="177" stroke="#5b6472" stroke-width="2" marker-end="url(#a)"/>
+  <!-- logs -->
+  <text x="330" y="38" font-size="15" font-weight="700" fill="#1f2328">2 · exact logs</text>
+  <rect x="322" y="52" width="250" height="250" rx="12" fill="#f3f0fb" stroke="#8b6fd6" stroke-width="1.5"/>
+  <g font-size="13" fill="#1f2328">
+    <text x="340" y="86" font-weight="600">world events, every tick</text>
+    <text x="340" y="104" fill="#57606a">blocks, entities, damage, digging</text>
+    <text x="340" y="136" font-weight="600">block snapshots</text>
+    <text x="340" y="154" fill="#57606a">start / end + region diffs</text>
+    <text x="340" y="186" font-weight="600">actions + player state</text>
+    <text x="340" y="204" fill="#57606a">hotbar, health, crosshair target</text>
+    <text x="340" y="236" font-weight="600">camera pose per frame</text>
+    <text x="340" y="254" fill="#57606a">aligned first-person videos</text>
+    <rect x="340" y="268" width="168" height="24" rx="12" fill="#8b6fd6"/>
+    <text x="354" y="285" font-size="12" font-weight="700" fill="#fff">replay mismatch = 0</text>
+  </g>
+  <line x1="576" y1="177" x2="618" y2="177" stroke="#5b6472" stroke-width="2" marker-end="url(#a)"/>
+  <!-- mineengine -->
+  <text x="630" y="38" font-size="15" font-weight="700" fill="#1f2328">3 · mineengine white box</text>
+  <rect x="622" y="52" width="336" height="250" rx="12" fill="#fdf4e3" stroke="#e0a43a" stroke-width="1.5"/>
+  <g font-size="13" fill="#1f2328">
+    <text x="640" y="86" font-weight="600">replay the world, render per player and frame</text>
+    <text x="640" y="104" fill="#57606a">geometry from your client jar's block models</text>
+    <rect x="640" y="120" width="300" height="104" rx="8" fill="#fff" stroke="#f0d29a"/>
+    <text x="652" y="142" font-weight="600">gbuf.npz, per pixel</text>
+    <text x="652" y="160" fill="#57606a">block type · block state · face</text>
+    <text x="652" y="177" fill="#57606a">instance (players, mobs, items)</text>
+    <text x="652" y="194" fill="#57606a">depth · dig stage · edges</text>
+    <text x="652" y="211" fill="#57606a">no UI drawn: HUD state stays in the log</text>
+    <text x="640" y="248" font-weight="600">cams.npz · state.jsonl · proxy.mp4</text>
+    <text x="640" y="268" fill="#57606a">clips: 81 frames at 16 fps, block changes</text>
+    <text x="640" y="286" fill="#57606a">viewers: real | white box | state</text>
+  </g>
+</svg>

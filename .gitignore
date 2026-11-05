@@ -1,0 +1,34 @@
+__pycache__/
+*.pyc
+*.egg-info/
+.venv/
+build/
+dist/
+.pytest_cache/
+*.log
+# keys (e.g. MINESKIN_API_KEY) and OS files
+.env
+.env.*
+.DS_Store
+._*
+# quick-start outputs in the repository root (README: --output-dir out, --out wb, --out view.mp4)
+/out/
+/output*/
+/wb/
+/*.mp4
+# from your own Minecraft installation (scripts/setup_assets.py; never commit)
+capture/server/skins/pool/default_*
+capture/server/skins/reference/default_*
+capture/postprocess/assets/minecraft-hud-oxygen-bar-rgba.png
+# downloaded plugins (scripts/setup_assets.py; *.part = an unfinished download)
+capture/server/plugins/ProtocolLib.jar
+capture/server/plugins/SkinsRestorer.jar
+capture/server/plugins/*.part
+# built (capture/server/build_plugin.sh or capture/windows/setup_windows.py)
+capture/server/plugins/MirrorBot-1.0.jar
+# written by the plugins if a Paper server runs inside capture/server
+capture/server/plugins/ProtocolLib/
+capture/server/plugins/SkinsRestorer/locales/
+capture/server/plugins/SkinsRestorer/skins/
+# signed skin caches (capture/regenerate_skin_cache.py --upload; only the Docker path needs them): Mojang-signed data, keep them local
+*.customskin

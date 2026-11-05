@@ -1,0 +1,33 @@
+MineEngine
+Copyright 2026 Ziyang Ye
+
+This product includes software derived from SolarisEngine (https://github.com/solaris-wm/solaris-engine,
+documentation at https://solaris-wm.github.io/solaris-engine/), Copyright the SolarisEngine contributors, licensed under
+the Apache License, Version 2.0.
+
+The files under capture/ started from the SolarisEngine snapshot at upstream commit
+78f23e7a5f120e28df4819b7cc8b91ea0806ca17 (2026-07-23, "pin webpack to 5.108.4 for prismarine-viewer-colalab install").
+Every file under capture/ that differs from that commit, or is not in it, was modified or added for this repository;
+capture/MODIFICATIONS.md lists them.
+The modified upstream files are mainly in controller/, postprocess/, server/episode-manager-plugin/ and camera/, plus
+generate_compose.py, run.sh, regenerate_skin_cache.py and README.md. What was changed and added:
+- a Windows-native runtime and a headless Linux runtime;
+- a camera capture mod that records the rendered camera pose and FOV of every frame, plus a pose link;
+- world-state logging that replays exactly;
+- per-frame player state;
+- 45+ episode types;
+- local skins;
+- verification tools.
+
+The Minecraft content visible in the gameplay images (docs/assets/ and capture/docs/source/_static/) is (c) Mojang /
+Microsoft, shown under the Minecraft Usage Guidelines, and is not covered by the Apache License.
+
+Not included in this repository. Each item is obtained by the user and is under its own terms:
+- Minecraft, including the client and server jars, assets, block models and default skins. Mojang; Minecraft EULA. Read from the user's own installation.
+- Paper. Downloaded by the capture setup.
+- ProtocolLib, SkinsRestorer. Downloaded by scripts/setup_assets.py; see THIRD_PARTY.md.
+- Fabric Loader. Fetched by the capture mod build and the client install.
+- Mineflayer and other npm packages. See capture/package.json.
+- nvdiffrast. Optional GPU rasteriser, installed separately.
+
+THIRD_PARTY.md lists these and the few third-party files that are stored in this repository.

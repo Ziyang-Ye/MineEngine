@@ -1,0 +1,18 @@
+# Modified by Ziyang Ye for MineEngine, 2026 (from SolarisEngine 78f23e7); see capture/MODIFICATIONS.md
+name: MirrorBot
+version: "${project.version}"
+main: me.berrycraft.mirrorbot.EpisodeManager
+api-version: "1.21"
+softdepend: ["SkinsRestorer", "ProtocolLib"]
+commands:
+  episode:
+    description: Start or stop an episode test.
+    usage: /episode <start | stop>
+  worldstate:
+    description: Per-episode world-state logging (begin/end/note/info/status).
+    usage: /worldstate <begin|end|note|info|status> [key=value...]
+    permission: mirrorbot.worldstate
+permissions:
+  mirrorbot.worldstate:
+    description: Allows driving the world-state logger (RCON/console).
+    default: op

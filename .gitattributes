@@ -1,0 +1,10 @@
+# Normalise line endings (same rules as capture/.gitattributes): shell scripts and the other text files stay LF even on a
+# Windows checkout with core.autocrlf=true; only the Windows batch files are CRLF.
+* text=auto eol=lf
+*.sh text eol=lf
+*.cmd text eol=crlf
+*.bat text eol=crlf
+*.jar binary
+*.png binary
+*.gif binary
+*.gz binary

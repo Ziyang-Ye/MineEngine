@@ -1,0 +1,23 @@
+# Modified by Ziyang Ye for MineEngine, 2026 (from SolarisEngine 78f23e7); see capture/MODIFICATIONS.md
+node_modules
+camera/data_alpha
+camera/data_bravo
+camera/output_alpha
+camera/output_bravo
+output*/
+data*/
+.vscode/
+logs/
+aligned/
+videos/
+**/__pycache__/
+.git/
+.gitignore
+*.md
+compose_configs/
+
+.cache/
+# keys and local environments (patterns are anchored at the build-context root, hence **/)
+**/.env
+**/.env.*
+**/.venv/

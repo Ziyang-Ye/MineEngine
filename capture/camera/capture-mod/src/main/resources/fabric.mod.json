@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "solaris-capture",
+  "version": "${version}",
+  "name": "Solaris Capture",
+  "description": "Records the client's main render target to ffmpeg (wall-clock PTS) with a per-frame camera pose sidecar.",
+  "authors": ["Ziyang Ye"],
+  "license": "Apache-2.0",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["org.solaris.capture.SolarisCapture"]
+  },
+  "mixins": ["solaris-capture.mixins.json"],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "minecraft": "${minecraft_version}",
+    "java": ">=21"
+  }
+}

@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mineengine"
+version = "0.1.0.dev0"
+description = "An automated multiplayer Minecraft data engine: bot-played episodes, two-player captures and exact-state per-pixel white boxes"
+readme = "README.md"
+license = "Apache-2.0"
+authors = [{name = "Ziyang Ye"}]
+license-files = ["LICENSE", "NOTICE"]
+requires-python = ">=3.10"
+# The licence is the PEP 639 expression above; setuptools>=77 rejects "License ::" classifiers next to it.
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+dependencies = ["numpy", "pillow", "opencv-python-headless", "torch", "av>=13"]   # av: h264 writing (its wheels bundle FFmpeg with x264)
+
+[project.urls]
+Homepage = "https://github.com/Ziyang-Ye/MineEngine"
+
+[tool.setuptools]
+packages = ["mineengine", "mineengine.data"]
+
+[tool.setuptools.package-data]
+"mineengine.data" = ["*.json"]
