@@ -1367,6 +1367,9 @@ def process(ep, root, out, a, R=None):
         if old.get("rendered") or R is None:
             return dict(old, skipped="done (episode.json exists; --force to redo)")
     P = EpisodeProxy(ep, root, a)
+    roster = sorted(set(ep["bots"]) | {str(p) for e in P.ev if e.get("type") == "episode_begin" for p in e.get("tracked_players") or [] if isinstance(p, str)})
+    if len(roster) > 2:                                                          # more than two players per world is not supported yet: refuse instead of pairing silently
+        raise ValueError(f"roster {roster} has {len(roster)} players; cap2proxy handles two players per world (Alpha / Bravo) for now")
     os.makedirs(ed, exist_ok=True)
     fin, _ = P.bt.final()
     w = {"origin": P.bt.origin, "start": P.bt.ids0, "final": fin}

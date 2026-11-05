@@ -2,26 +2,32 @@
 
 English | [中文](README_zh.md)
 
-An automated multiplayer Minecraft data engine. Two bots play 45+ kinds of episodes on their own (building, breaking, PvP, mobs, riding, farming, redstone, fluids); every run records both players' first-person videos with exact actions, camera poses and a world-state log that replays exactly, and every frame gets a per-pixel white box rendered from the logged world.
+An automated multiplayer Minecraft data engine. Bot players play 45 types of episodes on their own: building, breaking, PvP, fighting mobs, riding, farming, redstone, water and lava. For every player it records the first-person video, the action of every frame and the camera pose that rendered it; for every world, a state log that replays exactly. From that log it renders a per-pixel white box of every frame.
 
-<p align="center"><img src="docs/assets/hero.gif" width="900" alt="Two players at the same moment: real frames (left) and the white box rendered from the logged world state (right)"></p>
+<p align="center"><img src="docs/assets/overview.jpg" width="960" alt="Four captured scenes: real frames (top) and their white boxes rendered from the logged world (bottom)"></p>
 
-The left column is the real game; the right column is the white box, rendered from the replayed world state. Rows are the two players at the same moment.
+- **Multiplayer.** Every world runs two bot players, each with its own camera client, and many worlds run in parallel (4 per RTX 6000D GPU). More players per world is work in progress.
+- **Exact, not estimated.** Every white-box pixel comes from the logged world: which block, which state (a door's `open`, a crop's `age`, a water `level`), which face, which entity, how far it is dug. The log replays the world block for block.
+- **Aligned with the video.** Each view's white box draws the other players where that player's client drew them; on moving players the median name-tag error is 2.7 px.
+- **Diverse.** 45 episode types, 44 biomes plus flat worlds, dawn, day, dusk and night, rain, snow and thunderstorms.
+- **Runs on your machines.** Capture runs natively on Windows and headless on Linux GPU servers (a Docker path is kept too); the white-box pipeline is pure Python.
 
-- `capture/` records two players' first-person videos, ground-truth actions, and the camera pose of every rendered frame. It also records a world-state log that replays exactly.
-- `mineengine/` turns each capture into training data. From the replayed world it renders the white box: which block, which block state, which face, which entity, and the dig progress. It also writes aligned clips, per-entity reference sheets, statistics and viewers.
+## How it works
 
-The white box is not estimated from video. Every pixel's label comes from the logged world:
-- a door's `open` flag;
-- a crop's `age`;
-- a water `level`;
-- which player is where.
+<p align="center"><img src="docs/assets/system.jpg" width="960" alt="System: one capture world (Paper server with the MirrorBot plugin, two bot players, two camera clients), the recorded outputs, and the white-box pipeline"></p>
 
-<p align="center"><img src="docs/assets/pipeline.svg" width="900" alt="capture -> exact logs -> mineengine white box"></p>
+- `capture/` runs the worlds. A Paper server with the MirrorBot plugin starts the episodes, logs the world state and binds each camera client to its player. Mineflayer bots play; each bot has a camera client (a real Minecraft client with our capture mod) that records the first-person video and the pose of every rendered frame.
+- `mineengine/` turns each capture into training data: it replays the world, renders the white box of every view (block type, block state, face, entity id, depth, dig stage) and writes aligned clips, per-entity reference sheets, statistics and viewers.
+
+## Scenes
+
+<p align="center"><img src="docs/assets/scenes.jpg" width="960" alt="Sixteen episode types in sixteen biomes: real frame over its white box"></p>
+
+<p align="center"><img src="docs/assets/environments.jpg" width="960" alt="Time of day and weather; insets show the white box of the same frame"></p>
 
 ## What every pixel holds
 
-<p align="center"><img src="docs/assets/channels.png" width="900" alt="one real frame and its white-box channels"></p>
+<p align="center"><img src="docs/assets/channels.jpg" width="960" alt="One real frame and its white-box channels"></p>
 
 The planes are `[frames, 192, 336]`; the full spec is in [docs/whitebox_channels.md](docs/whitebox_channels.md).
 
@@ -36,38 +42,53 @@ The planes are `[frames, 192, 336]`; the full spec is in [docs/whitebox_channels
 
 Geometry comes from the jar's block models: slabs, stairs, doors, crops, torches, rails, fluids by level, waterlogged blocks. UI is never drawn into the white box; HUD state (health, hotbar, crosshair target) stays in the per-frame log.
 
+## Multiplayer: one shared world
+
+<p align="center"><img src="docs/assets/multiview.jpg" width="960" alt="Both players' views at the same moment and a top-down map of the logged world"></p>
+
+<p align="center"><img src="docs/assets/hero.gif" width="900" alt="Both players at the same moment, in motion: real frames (left) and white boxes (right)"></p>
+
+- Both players' videos are aligned in time; every frame has the camera pose and FOV that rendered it.
+- Each player's pixels in the other's view are labelled exactly (`pid`).
+- Today each world holds two players, and many worlds run in parallel; more players per world is work in progress.
+
 ## The world changes, the white box follows
 
-<p align="center"><img src="docs/assets/tnt.png" width="900" alt="TNT demolition: real frames (top) and white box (bottom)"></p>
+<p align="center"><img src="docs/assets/events.jpg" width="960" alt="TNT demolition: four moments, the logged block changes over time, and the crater from above"></p>
 
-Every block change is logged and replayed: placing, breaking, explosions, doors, crops, water. The crater in the white box is the logged crater, block for block. The mesh follows every state change, and only the 16 × 16 columns around a change are re-meshed.
+Every block change is logged and replayed: placing, breaking, explosions, doors, crops, water. The crater in the white box is the logged crater, block for block; replaying the log from the start snapshot gives the end snapshot exactly. Only the 16 × 16 columns around a change are re-meshed.
 
-## Two players, one shared world
+## The white box lines up with the video
 
-<p align="center"><img src="docs/assets/multiview.png" width="900" alt="both players' views, the other player's exact pixels, and a top-down map"></p>
+<p align="center"><img src="docs/assets/accuracy.jpg" width="960" alt="The other player's white box before and after the per-view lag correction, and the remaining lag over all measured views"></p>
 
-- Both videos are aligned in time.
-- Every frame has the camera pose and FOV that rendered it.
-- Each player's pixels in the other's view are labelled exactly (`pid`, magenta).
+A camera client smooths the motion of the other players and draws them a little behind their server position (about 0.16 s). The engine measures this lag for every view from the name tags in the video and draws the other players where the client drew them.
 
-## What it records
+## The captured dataset
 
-<p align="center"><img src="docs/assets/episodes.png" width="900" alt="episode types: real frame (top) and white box (bottom)"></p>
+<p align="center"><img src="docs/assets/dataset.png" width="960" alt="Episodes per type, biomes, time of day and weather, and key numbers of the capture"></p>
 
 | | |
 |---|---|
-| Players | Two bots act together: build, break, fight, ride, farm, use redstone and fluids. There are 45+ episode types in 45 biomes plus flat worlds, with mixed weather and time of day. |
+| Players | Two bots per world act together: build, break, fight, ride, farm, use redstone and fluids. 45 episode types (38 of them in our capture), 44 biomes plus flat worlds, mixed weather and time of day. |
 | Video | A Fabric mod captures frames inside each camera client (NVENC or x264). For every frame it logs the camera pose and FOV that were actually rendered. The FOV is fixed at 70°. |
 | Actions | Per-frame action labels. A UDP pose link pairs every action with the exact frame that rendered it. |
 | World state | Per-tick entities, damage, knockback and deaths, swings, item use and digging progress. Every block that was touched is read back each tick, and the whole region is diffed every second. The log replays the world exactly. |
 | Player state | Hotbar, armour, health, food, status effects and crosshair target, per frame. |
-| Scale | Windows-native or headless Linux (Xvfb + VirtualGL / EGL). On RTX 6000D GPUs we ran 4 capture instances per GPU and collected about 3,000 two-player episodes in two waves. |
+| Scale | On RTX 6000D GPUs we ran 4 capture worlds per GPU on headless Linux and collected 2,952 two-player episodes (82.5 h of first-person video) in two waves. |
 
 Comments in the code cite requirement ids such as `T12` (camera sync) or `T16` (per-frame player state); [docs/requirements.md](docs/requirements.md) lists all of them and where each one lives.
 
 <p align="center"><img src="docs/assets/skins.png" width="900" alt="procedural skins"></p>
 
 Skins are 300 procedural skins plus a held-out set of 24, and the 18 Minecraft defaults (extracted from your own client at setup). Every skin has a front / back / side reference sheet. On the native Windows and Linux runners, skins are rendered locally, with no online service. The older Docker path can only show Mojang-signed skins, which need a one-time upload to MineSkin ([capture/STATEFUL_CAPTURE.md](capture/STATEFUL_CAPTURE.md), section 3.6).
+
+## Platforms
+
+| | Windows 10 / 11 | Linux | macOS |
+|---|---|---|---|
+| Capture | native: `capture\run_windows.cmd` | headless GPU servers: `capture/linux/run_headless.sh` (Xvfb + VirtualGL / EGL); laptops: the Docker path | not tested |
+| White-box pipeline (`mineengine`) | CPU self-tests in CI | CPU self-tests in CI; GPU rendering with nvdiffrast | CPU self-tests in CI |
 
 ## Quick start
 
