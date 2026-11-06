@@ -455,20 +455,24 @@ def skin_unit_checks(d):
     ru = rec(lead, foll, "Bravo", start)                                          # Camera of Alpha sees Bravo: start-time meta -> unknown
     rl = rec(lead, foll, "Bravo", fin)
     rz = rec(lead, foll, "Bravo", dict(fin, local_skins={"enabled": True, "skins": {}}))   # finalized, entry absent -> not loaded
-    os.remove(os.path.join(sb, "output", "skins", f"{rl['sha1']}.png")); os.chmod(os.path.join(sb, "output", "skins"), 0o555)
+    sk = os.path.join(sb, "output", "skins"); os.remove(os.path.join(sk, f"{rl['sha1']}.png")); os.chmod(sk, 0o555)
+    try:                                                                          # can this platform make a directory read-only? (Windows and root: no)
+        open(os.path.join(sk, ".probe"), "w").close(); os.remove(os.path.join(sk, ".probe")); ro = False
+    except OSError:
+        ro = True
     try:
-        rr = rec(lead, foll, "Bravo", fin)                                        # read-only batch: a problem, not an exception
+        rr = rec(lead, foll, "Bravo", fin) if ro else None                         # read-only batch: a problem, not an exception
     except OSError as e:
         rr = {"ok": None, "problems": [f"raised {e}"]}
     finally:
-        os.chmod(os.path.join(sb, "output", "skins"), 0o755)
+        os.chmod(sk, 0o755)
     row("u skin rules", "assignment / camera meta / read-only", ra["ok"] is True and ra["assignment_ok"] is False and rb_["ok"] is True and rf["ok"] is True
         and rg["ok"] is False and "rcon timeout" in str(rg["problems"]) and ru["ok"] is True and ru["camera_check"] is None and "not finalized" in ru.get("camera_note", "")
         and ru["applied_epoch_ms"] is None and rl["ok"] is True and rl["camera_check"] is True and rl["applied_epoch_ms"] == 123.0 and rz["ok"] is False
-        and rz["camera_check"] is False and rr["ok"] is False and "cannot copy" in str(rr["problems"]),
+        and rz["camera_check"] is False and (rr is None or (rr["ok"] is False and "cannot copy" in str(rr["problems"]))),
         f"leader file + other bot failed -> Alpha ok {ra['ok']} (assignment_ok {ra['assignment_ok']}); follower note -> {rf['ok']}; unnamed error -> {rg['ok']}; "
         f"start-time camera meta -> camera_check {ru['camera_check']}, ok {ru['ok']}; finalized loaded -> {rl['camera_check']} {rl['applied_epoch_ms']}; absent -> "
-        f"{rz['camera_check']}; read-only output/skins -> ok {rr['ok']} {str(rr['problems'])[:60]}")
+        f"{rz['camera_check']}; read-only output/skins -> " + (f"ok {rr['ok']} {str(rr['problems'])[:60]}" if rr is not None else "not testable here (directory permissions not enforced)"))
 
 
 def robust_checks(work, root):
