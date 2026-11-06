@@ -1,7 +1,5 @@
 # Headless Linux
 
-English | [中文](README_zh.md)
-
 This setup runs the native runner `windows/run_windows.py` inside a headless Linux job container. The runner starts Paper, two bots and two camera clients with the `solaris-capture` mod.
 - It is one bash script, with no Docker.
 - GPU nodes can have no internet access at all.

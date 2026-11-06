@@ -1,8 +1,6 @@
 <!-- Modified by Ziyang Ye for MineEngine, 2026 (from SolarisEngine 78f23e7); see capture/MODIFICATIONS.md -->
 # capture/: two-player Minecraft capture (from SolarisEngine; Windows-native and headless Linux)
 
-English | [中文](README_zh.md)
-
 The capture engine is a modified version of [SolarisEngine](https://solaris-wm.github.io/solaris-engine/) (Apache-2.0),
 starting from upstream commit `78f23e7` (2026-07-23). It is released together with the `mineengine` white-box pipeline (see the
 repository [README](../README.md)).

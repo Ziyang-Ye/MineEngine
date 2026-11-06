@@ -1,7 +1,5 @@
 # Stateful capture with Docker (the laptop path)
 
-English | [中文](STATEFUL_CAPTURE_zh.md)
-
 This directory is a modified version of SolarisEngine (Apache-2.0). This page covers its original Docker path: two-player Minecraft capture on one Linux gaming laptop with Docker and an NVIDIA GPU. The main paths today are Windows-native (`windows/README.md`) and headless Linux (`linux/README.md`).
 
 Besides the video and the per-frame actions of upstream SolarisEngine, a run records an **explicit, editable world state**:

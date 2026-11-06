@@ -1,7 +1,5 @@
 # Running natively on Windows
 
-English | [中文](README_zh.md)
-
 The whole capture runs directly on Windows 11, with **no Docker and no WSL**.
 - Each former container becomes an ordinary local process. All of them listen only on `127.0.0.1`, except the bot coordination ports (section 2).
 - The output layout and file names are the same as the Linux / Docker version's (see `OUTPUT_SCHEMA.md`), so post-processing is unchanged.

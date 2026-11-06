@@ -10,7 +10,7 @@
 # ACCEPT_MINECRAFT_EULA=1 states that YOU accept the Minecraft EULA (https://aka.ms/MinecraftEULA).
 # Work files (worlds, MKVs, caches) go to a new directory mineengine_<TAG>.XXXXXX that the script creates under
 # MINEENGINE_LOCAL_ROOT (node-local disk, default /tmp); it deletes only that directory, after the output is copied to OUT.
-# Staged layout: linux/README.md (Chinese: linux/README_zh.md).
+# Staged layout: linux/README.md.
 set -uo pipefail
 for kv in "$@"; do
   [[ "$kv" =~ ^[A-Za-z_][A-Za-z0-9_]*= ]] || { echo "run_headless.sh: arguments are KEY=VALUE (got: $kv)" >&2; exit 2; }

@@ -1,7 +1,5 @@
 # Capture requirement ids (T0–T20)
 
-English | [中文](requirements_zh.md)
-
 Comments in the capture code and in `mineengine` cite requirement ids such as `T12` or `T16`. Each id is one change made to the
 upstream SolarisEngine capture so that its logs are complete and exact enough to rebuild the white box frame by frame.
 This page lists every id, what it requires and where it lives. In the *where* column, paths are relative to `capture/` unless

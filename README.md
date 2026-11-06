@@ -1,14 +1,11 @@
 # MineEngine
 
-English | [中文](README_zh.md)
-
 An automated multiplayer Minecraft data engine. Bot players play 45 types of episodes on their own: building, breaking, PvP, fighting mobs, riding, farming, redstone, water and lava. For every player it records the first-person video, the action of every frame and the camera pose that rendered it; for every world, a state log that replays exactly. From that log it renders a per-pixel white box of every frame.
 
 <p align="center"><img src="docs/assets/overview.jpg" width="960" alt="Four captured scenes: real frames (top) and their white boxes rendered from the logged world (bottom)"></p>
 
 - **Multiplayer.** Every world runs two bot players, each with its own camera client, and many worlds run in parallel (4 per RTX 6000D GPU). More players per world is work in progress.
 - **Exact, not estimated.** Every white-box pixel comes from the logged world: which block, which state (a door's `open`, a crop's `age`, a water `level`), which face, which entity, how far it is dug. The log replays the world block for block.
-- **Aligned with the video.** Each view's white box draws the other players where that player's client drew them; on moving players the median name-tag error is 2.7 px.
 - **Diverse.** 45 episode types, 44 biomes plus flat worlds, dawn, day, dusk and night, rain, snow and thunderstorms.
 - **Runs on your machines.** Capture runs natively on Windows and headless on Linux GPU servers (a Docker path is kept too); the white-box pipeline is pure Python.
 
@@ -57,12 +54,6 @@ Geometry comes from the jar's block models: slabs, stairs, doors, crops, torches
 <p align="center"><img src="docs/assets/events.jpg" width="960" alt="TNT demolition: four moments, the logged block changes over time, and the crater from above"></p>
 
 Every block change is logged and replayed: placing, breaking, explosions, doors, crops, water. The crater in the white box is the logged crater, block for block; replaying the log from the start snapshot gives the end snapshot exactly. Only the 16 × 16 columns around a change are re-meshed.
-
-## The white box lines up with the video
-
-<p align="center"><img src="docs/assets/accuracy.jpg" width="960" alt="The other player's white box before and after the per-view lag correction, and the remaining lag over all measured views"></p>
-
-A camera client smooths the motion of the other players and draws them a little behind their server position (about 0.16 s). The engine measures this lag for every view from the name tags in the video and draws the other players where the client drew them.
 
 ## The captured dataset
 
