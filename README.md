@@ -21,7 +21,7 @@ An automated multiplayer Minecraft data engine. Bot players play 45 types of epi
 
 ## Scenes
 
-<p align="center"><img src="docs/assets/scenes.jpg" width="960" alt="Sixteen episode types in sixteen biomes: real frame over its white box"></p>
+<p align="center"><img src="docs/assets/scenes.jpg" width="960" alt="Sixteen episode types in fifteen biomes: real frame over its white box"></p>
 
 <p align="center"><img src="docs/assets/environments.jpg" width="960" alt="Time of day and weather; insets show the white box of the same frame"></p>
 
@@ -66,7 +66,7 @@ A camera client smooths the motion of the other players and draws them a little 
 
 ## The captured dataset
 
-<p align="center"><img src="docs/assets/dataset.png" width="960" alt="Episodes per type, biomes, time of day and weather, and key numbers of the capture"></p>
+<p align="center"><img src="docs/assets/dataset.jpg" width="960" alt="Episodes per type, biomes, time of day and weather, and key numbers of the capture"></p>
 
 | | |
 |---|---|

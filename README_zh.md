@@ -21,7 +21,7 @@
 
 ## 各种场景
 
-<p align="center"><img src="docs/assets/scenes_zh.jpg" width="960" alt="16 种回合、16 种地形：上面是真实画面，下面是同一帧的白模"></p>
+<p align="center"><img src="docs/assets/scenes_zh.jpg" width="960" alt="16 种回合、15 种地形：上面是真实画面，下面是同一帧的白模"></p>
 
 <p align="center"><img src="docs/assets/environments_zh.jpg" width="960" alt="不同时间和天气；小图是同一帧的白模"></p>
 
@@ -66,7 +66,7 @@
 
 ## 采集的数据
 
-<p align="center"><img src="docs/assets/dataset_zh.png" width="960" alt="各类回合的数量、地形、时间与天气，以及这次采集的关键数字"></p>
+<p align="center"><img src="docs/assets/dataset_zh.jpg" width="960" alt="各类回合的数量、地形、时间与天气，以及这次采集的关键数字"></p>
 
 - 45 种回合类型（这次采集用了其中 38 种）：建造、拆除、PvP、打怪、骑乘、种地、红石、流体……
 - 44 种地形加超平坦世界，天气和时间随机变化。
