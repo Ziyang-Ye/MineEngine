@@ -7,6 +7,7 @@ An automated multiplayer Minecraft data engine. Bot players play 45 types of epi
 - **Multiplayer.** Every world runs two bot players, each with its own camera client, and many worlds run in parallel (4 per RTX 6000D GPU). More players per world is work in progress.
 - **Exact, not estimated.** Every white-box pixel comes from the logged world: which block, which state (a door's `open`, a crop's `age`, a water `level`), which face, which entity, how far it is dug. The log replays the world block for block.
 - **Diverse.** 45 episode types, 44 biomes plus flat worlds, dawn, day, dusk and night, rain, snow and thunderstorms.
+- **Open data.** The 2,952 episodes we captured with it (82.5 h of first-person video with actions, poses, world logs and white boxes) are on Hugging Face: [ZiyangYe/MineEngine](https://huggingface.co/datasets/ZiyangYe/MineEngine).
 - **Runs on your machines.** Capture runs natively on Windows and headless on Linux GPU servers (a Docker path is kept too); the white-box pipeline is pure Python.
 
 ## How it works
@@ -56,6 +57,8 @@ Geometry comes from the jar's block models: slabs, stairs, doors, crops, torches
 Every block change is logged and replayed: placing, breaking, explosions, doors, crops, water. The crater in the white box is the logged crater, block for block; replaying the log from the start snapshot gives the end snapshot exactly. Only the 16 × 16 columns around a change are re-meshed.
 
 ## The captured dataset
+
+Download: [huggingface.co/datasets/ZiyangYe/MineEngine](https://huggingface.co/datasets/ZiyangYe/MineEngine) — one tar per episode with both players' 1280 × 720 videos, per-frame actions and camera poses, the world-state log and snapshots, and the rendered white boxes (267 GB, CC BY-NC 4.0). `metadata.parquet` lists every episode with its type, biome, time of day and weather.
 
 <p align="center"><img src="docs/assets/dataset.jpg" width="960" alt="Episodes per type, biomes, time of day and weather, and key numbers of the capture"></p>
 
