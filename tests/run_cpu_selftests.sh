@@ -9,7 +9,8 @@ PY=${PY:-python}; WORK=${WORK:-$(mktemp -d)}; mkdir -p "$WORK"
 REG=${MINEENGINE_REGISTRY:-${MINEENGINE_HOME:-$HOME/.cache/mineengine}/mc_registry_1.21.json}
 t() {   # name, command...: run, keep the log, print its last line; stop at the first failure
   local n=$1; shift
-  if "$@" > "$WORK/$n.log" 2>&1; then echo "ok   $n: $(tail -1 "$WORK/$n.log")"; else echo "FAIL $n (log $WORK/$n.log):"; tail -20 "$WORK/$n.log"; exit 1; fi
+  if "$@" > "$WORK/$n.log" 2>&1; then echo "ok   $n: $(tail -1 "$WORK/$n.log")"; else echo "FAIL $n (log $WORK/$n.log):"
+    grep -n -E "FAIL|Error|Traceback" "$WORK/$n.log" | head -40; echo "--- last lines:"; tail -20 "$WORK/$n.log"; exit 1; fi
 }
 for m in cap_palette cap_reader cap_synth state_proxy mc_proxy_style; do t "$m" $PY -m mineengine.$m --test; done
 t cap_selftest $PY -m mineengine.cap_selftest --work "$WORK/st"
